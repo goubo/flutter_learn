@@ -1,3 +1,19 @@
+/// 路由
+//
+const String mainPage = "/";
+//旁白
+const String narration = "/narration";
+
+/// 路由结束
+
+/// 剧情序列
+  
+//序幕保存的点
+const String prelude = "prelude";
+
+/// 剧情序列借宿
+
+/// 文本注释
 const List<String> preludeText = [
   "这里是",
   "开始游戏",

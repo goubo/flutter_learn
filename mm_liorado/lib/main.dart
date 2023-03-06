@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mm_liorado/common/utils/sp.dart';
 import 'package:mm_liorado/page1.dart';
-import 'package:mm_liorado/text_show.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mm_liorado/narration.dart';
 
 import 'common/constant.dart';
+import 'common/global.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,13 +16,13 @@ class MyApp extends StatelessWidget {
     return WillPopScope(
         child: MaterialApp(
           title: "拉多营地",
-          initialRoute: "/",
+          initialRoute: mainPage,
           routes: {
-            "/": (context) => const MainState(),
+            mainPage: (context) => const MainState(),
             "/page1": (context) => const Page1(),
             "/page2": (context) => const Page2(),
             "/page3": (context) => const Page3(),
-            "/text_show": (context) => const TextShow(),
+            narration: (context) => const Narration(),
           },
         ),
         onWillPop: () async {
@@ -38,39 +39,42 @@ class MainState extends StatefulWidget {
 }
 
 class _MainStateState extends State<MainState> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
   @override
   void initState() {
     super.initState();
-    initFromCache();
+    checkNarration();
   }
 
   //从缓存中获取信息
-  void initFromCache() async {
-    final SharedPreferences prefs = await _prefs;
-    bool begin = prefs.getBool("prelude") ?? false;
-    if (begin) {
-      //打开首页
-    } else {
+  void checkNarration() async {
+    bool begin = await PersistentStorage().getStorage(prelude) ?? false;
+    if (!begin) {
       //async 中，使用定时打开页面
       Future.delayed(const Duration(milliseconds: 1), () {
         //跳转到路由，传递参数，并且删除之前的所有路由路径
-        Navigator.pushNamedAndRemoveUntil(context, "/text_show", (_) => false,
-            arguments: {"text": preludeText, "plot": "prelude"});
+        Navigator.pushNamedAndRemoveUntil(context, narration, (_) => false,
+            arguments: TextShowArguments(preludeText, prelude, mainPage));
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () => {Navigator.pushNamed(context, "/page2")},
-          child: const Text("page1"),
-        ),
-      ],
+    return SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () => {Navigator.pushNamed(context, "/page2")},
+            child: const Text("page1"),
+          ),
+          const Spacer(),
+          ElevatedButton(
+              onPressed: () => {PersistentStorage().clear()},
+              child: const Text("重置缓存")),
+        ],
+      ),
     );
   }
 }

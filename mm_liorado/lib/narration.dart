@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:mm_liorado/common/utils/sp.dart';
 
-class TextShow extends StatefulWidget {
-  const TextShow({Key? key}) : super(key: key);
+class Narration extends StatefulWidget {
+  const Narration({Key? key}) : super(key: key);
 
   @override
-  State<TextShow> createState() => _TextShowState();
+  State<Narration> createState() => _NarrationState();
 }
 
-class _TextShowState extends State<TextShow> {
+class _NarrationState extends State<Narration> {
   var num = 0;
   final List<String> texts = [];
   final ScrollController _scrollController = ScrollController(); //listview的控制器
-  late Map arguments;
+  late TextShowArguments arguments;
 
   @override
   void initState() {
@@ -21,9 +22,9 @@ class _TextShowState extends State<TextShow> {
 
   @override
   Widget build(BuildContext context) {
-    arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    arguments = ModalRoute.of(context)!.settings.arguments as TextShowArguments;
     if (num == 0) {
-      texts.add(arguments["text"][num++]);
+      texts.add(arguments.text[num++]);
     }
     return GestureDetector(
       child: Container(
@@ -36,7 +37,7 @@ class _TextShowState extends State<TextShow> {
             itemCount: texts.length,
             controller: _scrollController,
             itemBuilder: (BuildContext _, int index) {
-              if (index == arguments['text'].length - 1) {
+              if (index == arguments.text.length - 1) {
                 return Text(
                   texts[index],
                   style: const TextStyle(
@@ -53,19 +54,12 @@ class _TextShowState extends State<TextShow> {
                       decoration: TextDecoration.none),
                 );
               }
-              return Text(
-                texts[index],
-                style: const TextStyle(
-                    fontSize: 31,
-                    color: Colors.white,
-                    decoration: TextDecoration.none),
-              );
             }),
       ),
       onTap: () {
-        if (num < arguments['text'].length) {
+        if (num < arguments.text.length) {
           setState(() {
-            texts.add("${arguments['text'][num++]}");
+            texts.add(arguments.text[num++]);
           });
           Future.delayed(
             const Duration(milliseconds: 10),
@@ -75,8 +69,21 @@ class _TextShowState extends State<TextShow> {
                 curve: Curves.easeOut),
           );
         } else {
+          //跳转到指定位置
+          Navigator.pushNamedAndRemoveUntil(
+              context, arguments.backRouter, (_) => false);
+          //保存剧情进度
+          PersistentStorage().setStorage(arguments.plot, true);
         }
       },
     );
   }
+}
+
+class TextShowArguments {
+  final List<String> text;
+  final String plot;
+  final String backRouter;
+
+  TextShowArguments(this.text, this.plot, this.backRouter);
 }
