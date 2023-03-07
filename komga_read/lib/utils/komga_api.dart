@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:komga_read/entity/komga_entity.dart';
+import 'package:komga_read/entity/komga_library_entity.dart';
+import 'package:komga_read/entity/komga_me_entity.dart';
+import 'package:komga_read/generated/json/komga_library_entity.g.dart';
+import 'package:komga_read/generated/json/komga_me_entity.g.dart';
 import 'package:komga_read/utils/http_client.dart';
 import 'package:komga_read/utils/ps.dart';
 import 'package:logger/logger.dart';
@@ -29,7 +32,7 @@ class KomgaApi {
   }) async {
     if (cookie != null) {
       options ??= Options();
-      options.headers ?? {};
+      options.headers ??= {};
       options.headers?["Cookie"] = cookie;
     } else if (await PersistentStorage().hasKey("komga_user") && await PersistentStorage().hasKey("komga_pwd")) {
       options ??= Options();
@@ -53,19 +56,23 @@ class KomgaApi {
         onReceiveProgress: onReceiveProgress);
     if (response.headers['set-cookie'] != null) {
       cookie = response.headers['set-cookie']?.first.split(";")[0];
-      logger.i("set-cookie : $cookie");
     }
     return response;
   }
 
   /// 登录
-  Future<KomgaMe> login(String baseUrl, String login, String password) async {
+  Future<KomgaMeEntity> login(String baseUrl, String login, String password) async {
     String credentials = "$login:$password";
     Codec<String, String> stringToBase64 = utf8.fuse(base64);
     String encoded = stringToBase64.encode(credentials);
     var r = await _query("$baseUrl/api/v2/users/me",
         options: Options(method: "GET", headers: {"Authorization": "Basic $encoded"}));
-    var komgaMe = KomgaMe.fromJson(r.data);
+    var komgaMe = $KomgaMeEntityFromJson(r.data);
     return komgaMe;
+  }
+
+  Future<List<KomgaLibraryEntity>> getLibrary() async {
+    var r = await _query("/api/v1/libraries");
+    return (r.data as List<dynamic>).map((e) => $KomgaLibraryEntityFromJson((e as Map<String, dynamic>))).toList();
   }
 }

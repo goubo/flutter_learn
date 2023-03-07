@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class SettingItem extends StatelessWidget {
-  const SettingItem(this.title, this.widget, {Key? key}) : super(key: key);
+class ListItem extends StatelessWidget {
+  const ListItem(this.title, this.widget, {Key? key}) : super(key: key);
   final String title;
   final Widget widget;
 
