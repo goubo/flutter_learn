@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:komga_read/utils/config.dart';
 import 'package:komga_read/utils/komga_api.dart';
 import 'package:komga_read/utils/ps.dart';
 import 'package:logger/logger.dart';
@@ -114,7 +115,7 @@ class _FormWidgetState extends State<FormWidget> {
                       child: Text("退出"),
                     ),
                     onPressed: () {
-                      KomgaApi.cookie = null;
+                      Global.cookie = null;
                       PersistentStorage().removeStorage("komga_address");
                       PersistentStorage().removeStorage("komga_user");
                       PersistentStorage().removeStorage("komga_pwd");

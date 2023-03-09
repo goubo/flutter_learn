@@ -1,22 +1,30 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
+import 'package:dio_logger/dio_logger.dart';
 
 import 'config.dart';
 
-class HttpRequest {
-  var logger = Logger();
-  Dio _dio;
+class HttpUtil {
+  static HttpUtil? _instance;
 
-  static final HttpRequest _instance = HttpRequest._internal();
+  factory HttpUtil() => _getInstance()!;
 
-  factory HttpRequest() => _instance;
+  static HttpUtil? get instance => _getInstance();
 
-  static HttpRequest get instance => HttpRequest._internal();
+  static HttpUtil? _getInstance() {
+    _instance ??= HttpUtil._internal();
+    return _instance;
+  }
 
-  HttpRequest._internal()
+  HttpUtil._internal()
       : _dio = Dio(BaseOptions(
           connectTimeout: httpTimeOut,
-        ));
+        )) {
+    _dio.interceptors.add(dioLoggerInterceptor);
+  }
+
+  final Dio _dio;
 
   Dio getDio() => _dio;
 }

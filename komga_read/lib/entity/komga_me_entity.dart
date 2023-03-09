@@ -1,39 +1,44 @@
-import 'dart:convert';
-
-import 'package:komga_read/generated/json/base/json_field.dart';
-import 'package:komga_read/generated/json/komga_me_entity.g.dart';
-
-@JsonSerializable()
 class KomgaMeEntity {
+  String? id;
+  String? email;
+  List<String>? roles;
+  bool? sharedAllLibraries;
+  List<String>? sharedLibrariesIds;
+  List<String>? labelsAllow;
+  List<String>? labelsExclude;
+  String? ageRestriction;
 
-	late String id;
-	late String email;
-	late List<String> roles;
-	late bool sharedAllLibraries;
-	late List<dynamic> sharedLibrariesIds;
-	late List<dynamic> labelsAllow;
-	late List<dynamic> labelsExclude;
-	dynamic ageRestriction;
-  
-  KomgaMeEntity();
+  KomgaMeEntity(
+      {this.id,
+      this.email,
+      this.roles,
+      this.sharedAllLibraries,
+      this.sharedLibrariesIds,
+      this.labelsAllow,
+      this.labelsExclude,
+      this.ageRestriction});
 
-  factory KomgaMeEntity.fromJson(Map<String, dynamic> json) => $KomgaMeEntityFromJson(json);
-
-  Map<String, dynamic> toJson() => $KomgaMeEntityToJson(this);
-
-  KomgaMeEntity copyWith({String? id, String? email, List<String>? roles, bool? sharedAllLibraries, List<dynamic>? sharedLibrariesIds, List<dynamic>? labelsAllow, List<dynamic>? labelsExclude, dynamic ageRestriction}) {
-      return KomgaMeEntity()..id= id ?? this.id
-			..email= email ?? this.email
-			..roles= roles ?? this.roles
-			..sharedAllLibraries= sharedAllLibraries ?? this.sharedAllLibraries
-			..sharedLibrariesIds= sharedLibrariesIds ?? this.sharedLibrariesIds
-			..labelsAllow= labelsAllow ?? this.labelsAllow
-			..labelsExclude= labelsExclude ?? this.labelsExclude
-			..ageRestriction= ageRestriction ?? this.ageRestriction;
+  KomgaMeEntity.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    email = json['email'];
+    roles = json['roles'].cast<String>();
+    sharedAllLibraries = json['sharedAllLibraries'];
+    sharedLibrariesIds = json['sharedLibrariesIds'].cast<String>();
+    labelsAllow = json['labelsAllow'].cast<String>();
+    labelsExclude = json['labelsExclude'].cast<String>();
+    ageRestriction = json['ageRestriction'];
   }
-    
-  @override
-  String toString() {
-    return jsonEncode(this);
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['email'] = email;
+    data['roles'] = roles;
+    data['sharedAllLibraries'] = sharedAllLibraries;
+    data['sharedLibrariesIds'] = sharedLibrariesIds;
+    data['labelsAllow'] = labelsAllow;
+    data['labelsExclude'] = labelsExclude;
+    data['ageRestriction'] = ageRestriction;
+    return data;
   }
 }

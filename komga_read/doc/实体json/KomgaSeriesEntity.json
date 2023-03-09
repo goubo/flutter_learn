@@ -1,0 +1,69 @@
+{
+  "id": "0BK926EJ6W17T",
+  "libraryId": "0BE1J92RGTTEZ",
+  "name": "邪靈附體",
+  "url": "/data/漫画/邪靈附體",
+  "created": "2023-02-27T12:53:49Z",
+  "lastModified": "2023-03-09T00:00:28Z",
+  "fileLastModified": "2023-02-27T20:52:31Z",
+  "booksCount": 251,
+  "booksReadCount": 0,
+  "booksUnreadCount": 250,
+  "booksInProgressCount": 1,
+  "metadata": {
+    "status": "ONGOING",
+    "statusLock": false,
+    "title": "邪靈附體",
+    "titleLock": false,
+    "titleSort": "邪靈附體",
+    "titleSortLock": false,
+    "summary": "",
+    "summaryLock": false,
+    "readingDirection": "",
+    "readingDirectionLock": false,
+    "publisher": "",
+    "publisherLock": false,
+    "ageRating": "",
+    "ageRatingLock": false,
+    "language": "",
+    "languageLock": false,
+    "genres": [
+      ""
+    ],
+    "genresLock": false,
+    "tags": [
+      ""
+    ],
+    "tagsLock": false,
+    "totalBookCount": "",
+    "totalBookCountLock": false,
+    "sharingLabels": [
+      ""
+    ],
+    "sharingLabelsLock": false,
+    "links": [
+      ""
+    ],
+    "linksLock": false,
+    "alternateTitles": [
+      ""
+    ],
+    "alternateTitlesLock": false,
+    "created": "2023-02-27T12:53:49Z",
+    "lastModified": "2023-03-09T00:01:16Z"
+  },
+  "booksMetadata": {
+    "authors": [
+      ""
+    ],
+    "tags": [
+      ""
+    ],
+    "releaseDate": "",
+    "summary": "",
+    "summaryNumber": "",
+    "created": "2023-02-27T12:53:49Z",
+    "lastModified": "2023-03-09T00:01:36Z"
+  },
+  "deleted": false
+}

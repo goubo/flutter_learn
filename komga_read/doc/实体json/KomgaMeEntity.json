@@ -1,0 +1,15 @@
+{
+  "id": "0BE1HAFBCTHZE",
+  "email": "goujinbo@outlook.com",
+  "roles": [
+    "USER",
+    "ADMIN",
+    "FILE_DOWNLOAD",
+    "PAGE_STREAMING"
+  ],
+  "sharedAllLibraries": true,
+  "sharedLibrariesIds": [],
+  "labelsAllow": [],
+  "labelsExclude": [],
+  "ageRestriction": null
+}

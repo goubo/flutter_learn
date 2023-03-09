@@ -1,0 +1,55 @@
+{
+  "id": "0BJZ1AG2TWC60",
+  "seriesId": "0BJZ1AG2TWC5Y",
+  "seriesTitle": "在异世界迷宫开后宫",
+  "libraryId": "0BE1J92RGTTEZ",
+  "name": "第01卷",
+  "url": "/data/漫画/在异世界迷宫开后宫/第01卷.zip",
+  "number": 1,
+  "created": "2023-02-26T13:31:54Z",
+  "lastModified": "2023-03-09T00:00:26Z",
+  "fileLastModified": "2023-02-26T20:07:07Z",
+  "sizeBytes": 222886235,
+  "size": "212.6 MiB",
+  "media": {
+    "status": "READY",
+    "mediaType": "application/zip",
+    "pagesCount": 178,
+    "comment": ""
+  },
+  "metadata": {
+    "title": "第01卷",
+    "titleLock": false,
+    "summary": "",
+    "summaryLock": false,
+    "number": "1",
+    "numberLock": false,
+    "numberSort": 1.0,
+    "numberSortLock": false,
+    "releaseDate": "",
+    "releaseDateLock": false,
+    "authors": [""
+    ],
+    "authorsLock": false,
+    "tags": [""
+    ],
+    "tagsLock": false,
+    "isbn": "",
+    "isbnLock": false,
+    "links": [""
+    ],
+    "linksLock": false,
+    "created": "2023-02-26T13:31:54Z",
+    "lastModified": "2023-03-09T00:00:26Z"
+  },
+  "readProgress": {
+    "page": 178,
+    "completed": true,
+    "readDate": "2023-02-27T03:48:56Z",
+    "created": "2023-02-27T03:48:56Z",
+    "lastModified": "2023-02-27T03:48:56Z"
+  },
+  "deleted": false,
+  "fileHash": "5skcyq",
+  "thumbnail": ""
+}

@@ -1,162 +1,244 @@
-import 'package:komga_read/generated/json/base/json_field.dart';
-import 'package:komga_read/generated/json/komga_series_entity.g.dart';
-import 'dart:convert';
-
-@JsonSerializable()
 class KomgaSeriesEntity {
+  String? id;
+  String? libraryId;
+  String? name;
+  String? url;
+  String? created;
+  String? lastModified;
+  String? fileLastModified;
+  int? booksCount;
+  int? booksReadCount;
+  int? booksUnreadCount;
+  int? booksInProgressCount;
+  Metadata? metadata;
+  BooksMetadata? booksMetadata;
+  bool? deleted;
+  String? thumbnail;
 
-	late String id;
-	late String libraryId;
-	late String name;
-	late String url;
-	late String created;
-	late String lastModified;
-	late String fileLastModified;
-	late int booksCount;
-	late int booksReadCount;
-	late int booksUnreadCount;
-	late int booksInProgressCount;
-	late KomgaSeriesMetadata metadata;
-	late KomgaSeriesBooksMetadata booksMetadata;
-	late bool deleted;
-  
-  KomgaSeriesEntity();
+  KomgaSeriesEntity(
+      {this.id,
+      this.libraryId,
+      this.name,
+      this.url,
+      this.created,
+      this.lastModified,
+      this.fileLastModified,
+      this.booksCount,
+      this.booksReadCount,
+      this.booksUnreadCount,
+      this.booksInProgressCount,
+      this.metadata,
+      this.booksMetadata,
+      this.deleted,
+      this.thumbnail});
 
-  factory KomgaSeriesEntity.fromJson(Map<String, dynamic> json) => $KomgaSeriesEntityFromJson(json);
-
-  Map<String, dynamic> toJson() => $KomgaSeriesEntityToJson(this);
-
-  KomgaSeriesEntity copyWith({String? id, String? libraryId, String? name, String? url, String? created, String? lastModified, String? fileLastModified, int? booksCount, int? booksReadCount, int? booksUnreadCount, int? booksInProgressCount, KomgaSeriesMetadata? metadata, KomgaSeriesBooksMetadata? booksMetadata, bool? deleted}) {
-      return KomgaSeriesEntity()..id= id ?? this.id
-			..libraryId= libraryId ?? this.libraryId
-			..name= name ?? this.name
-			..url= url ?? this.url
-			..created= created ?? this.created
-			..lastModified= lastModified ?? this.lastModified
-			..fileLastModified= fileLastModified ?? this.fileLastModified
-			..booksCount= booksCount ?? this.booksCount
-			..booksReadCount= booksReadCount ?? this.booksReadCount
-			..booksUnreadCount= booksUnreadCount ?? this.booksUnreadCount
-			..booksInProgressCount= booksInProgressCount ?? this.booksInProgressCount
-			..metadata= metadata ?? this.metadata
-			..booksMetadata= booksMetadata ?? this.booksMetadata
-			..deleted= deleted ?? this.deleted;
+  KomgaSeriesEntity.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    libraryId = json['libraryId'];
+    name = json['name'];
+    url = json['url'];
+    created = json['created'];
+    lastModified = json['lastModified'];
+    fileLastModified = json['fileLastModified'];
+    booksCount = json['booksCount'];
+    booksReadCount = json['booksReadCount'];
+    booksUnreadCount = json['booksUnreadCount'];
+    booksInProgressCount = json['booksInProgressCount'];
+    metadata = json['metadata'] != null ? Metadata.fromJson(json['metadata']) : null;
+    booksMetadata = json['booksMetadata'] != null ? BooksMetadata.fromJson(json['booksMetadata']) : null;
+    deleted = json['deleted'];
+    thumbnail = json['thumbnail'];
   }
-    
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
-}
 
-@JsonSerializable()
-class KomgaSeriesMetadata {
-
-	late String status;
-	late bool statusLock;
-	late String title;
-	late bool titleLock;
-	late String titleSort;
-	late bool titleSortLock;
-	late String summary;
-	late bool summaryLock;
-	late String readingDirection;
-	late bool readingDirectionLock;
-	late String publisher;
-	late bool publisherLock;
-	dynamic ageRating;
-	late bool ageRatingLock;
-	late String language;
-	late bool languageLock;
-	late List<dynamic> genres;
-	late bool genresLock;
-	late List<dynamic> tags;
-	late bool tagsLock;
-	dynamic totalBookCount;
-	late bool totalBookCountLock;
-	late List<dynamic> sharingLabels;
-	late bool sharingLabelsLock;
-	late List<dynamic> links;
-	late bool linksLock;
-	late List<dynamic> alternateTitles;
-	late bool alternateTitlesLock;
-	late String created;
-	late String lastModified;
-  
-  KomgaSeriesMetadata();
-
-  factory KomgaSeriesMetadata.fromJson(Map<String, dynamic> json) => $KomgaSeriesMetadataFromJson(json);
-
-  Map<String, dynamic> toJson() => $KomgaSeriesMetadataToJson(this);
-
-  KomgaSeriesMetadata copyWith({String? status, bool? statusLock, String? title, bool? titleLock, String? titleSort, bool? titleSortLock, String? summary, bool? summaryLock, String? readingDirection, bool? readingDirectionLock, String? publisher, bool? publisherLock, dynamic ageRating, bool? ageRatingLock, String? language, bool? languageLock, List<dynamic>? genres, bool? genresLock, List<dynamic>? tags, bool? tagsLock, dynamic totalBookCount, bool? totalBookCountLock, List<dynamic>? sharingLabels, bool? sharingLabelsLock, List<dynamic>? links, bool? linksLock, List<dynamic>? alternateTitles, bool? alternateTitlesLock, String? created, String? lastModified}) {
-      return KomgaSeriesMetadata()..status= status ?? this.status
-			..statusLock= statusLock ?? this.statusLock
-			..title= title ?? this.title
-			..titleLock= titleLock ?? this.titleLock
-			..titleSort= titleSort ?? this.titleSort
-			..titleSortLock= titleSortLock ?? this.titleSortLock
-			..summary= summary ?? this.summary
-			..summaryLock= summaryLock ?? this.summaryLock
-			..readingDirection= readingDirection ?? this.readingDirection
-			..readingDirectionLock= readingDirectionLock ?? this.readingDirectionLock
-			..publisher= publisher ?? this.publisher
-			..publisherLock= publisherLock ?? this.publisherLock
-			..ageRating= ageRating ?? this.ageRating
-			..ageRatingLock= ageRatingLock ?? this.ageRatingLock
-			..language= language ?? this.language
-			..languageLock= languageLock ?? this.languageLock
-			..genres= genres ?? this.genres
-			..genresLock= genresLock ?? this.genresLock
-			..tags= tags ?? this.tags
-			..tagsLock= tagsLock ?? this.tagsLock
-			..totalBookCount= totalBookCount ?? this.totalBookCount
-			..totalBookCountLock= totalBookCountLock ?? this.totalBookCountLock
-			..sharingLabels= sharingLabels ?? this.sharingLabels
-			..sharingLabelsLock= sharingLabelsLock ?? this.sharingLabelsLock
-			..links= links ?? this.links
-			..linksLock= linksLock ?? this.linksLock
-			..alternateTitles= alternateTitles ?? this.alternateTitles
-			..alternateTitlesLock= alternateTitlesLock ?? this.alternateTitlesLock
-			..created= created ?? this.created
-			..lastModified= lastModified ?? this.lastModified;
-  }
-    
-  @override
-  String toString() {
-    return jsonEncode(this);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['libraryId'] = libraryId;
+    data['name'] = name;
+    data['url'] = url;
+    data['created'] = created;
+    data['lastModified'] = lastModified;
+    data['fileLastModified'] = fileLastModified;
+    data['booksCount'] = booksCount;
+    data['booksReadCount'] = booksReadCount;
+    data['booksUnreadCount'] = booksUnreadCount;
+    data['booksInProgressCount'] = booksInProgressCount;
+    if (metadata != null) {
+      data['metadata'] = metadata!.toJson();
+    }
+    if (booksMetadata != null) {
+      data['booksMetadata'] = booksMetadata!.toJson();
+    }
+    data['deleted'] = deleted;
+    data['thumbnail'] = thumbnail;
+    return data;
   }
 }
 
-@JsonSerializable()
-class KomgaSeriesBooksMetadata {
+class Metadata {
+  String? status;
+  bool? statusLock;
+  String? title;
+  bool? titleLock;
+  String? titleSort;
+  bool? titleSortLock;
+  String? summary;
+  bool? summaryLock;
+  String? readingDirection;
+  bool? readingDirectionLock;
+  String? publisher;
+  bool? publisherLock;
+  String? ageRating;
+  bool? ageRatingLock;
+  String? language;
+  bool? languageLock;
+  List<String>? genres;
+  bool? genresLock;
+  List<String>? tags;
+  bool? tagsLock;
+  String? totalBookCount;
+  bool? totalBookCountLock;
+  List<String>? sharingLabels;
+  bool? sharingLabelsLock;
+  List<String>? links;
+  bool? linksLock;
+  List<String>? alternateTitles;
+  bool? alternateTitlesLock;
+  String? created;
+  String? lastModified;
 
-	late List<dynamic> authors;
-	late List<dynamic> tags;
-	dynamic releaseDate;
-	late String summary;
-	late String summaryNumber;
-	late String created;
-	late String lastModified;
-  
-  KomgaSeriesBooksMetadata();
+  Metadata(
+      {this.status,
+      this.statusLock,
+      this.title,
+      this.titleLock,
+      this.titleSort,
+      this.titleSortLock,
+      this.summary,
+      this.summaryLock,
+      this.readingDirection,
+      this.readingDirectionLock,
+      this.publisher,
+      this.publisherLock,
+      this.ageRating,
+      this.ageRatingLock,
+      this.language,
+      this.languageLock,
+      this.genres,
+      this.genresLock,
+      this.tags,
+      this.tagsLock,
+      this.totalBookCount,
+      this.totalBookCountLock,
+      this.sharingLabels,
+      this.sharingLabelsLock,
+      this.links,
+      this.linksLock,
+      this.alternateTitles,
+      this.alternateTitlesLock,
+      this.created,
+      this.lastModified});
 
-  factory KomgaSeriesBooksMetadata.fromJson(Map<String, dynamic> json) => $KomgaSeriesBooksMetadataFromJson(json);
-
-  Map<String, dynamic> toJson() => $KomgaSeriesBooksMetadataToJson(this);
-
-  KomgaSeriesBooksMetadata copyWith({List<dynamic>? authors, List<dynamic>? tags, dynamic releaseDate, String? summary, String? summaryNumber, String? created, String? lastModified}) {
-      return KomgaSeriesBooksMetadata()..authors= authors ?? this.authors
-			..tags= tags ?? this.tags
-			..releaseDate= releaseDate ?? this.releaseDate
-			..summary= summary ?? this.summary
-			..summaryNumber= summaryNumber ?? this.summaryNumber
-			..created= created ?? this.created
-			..lastModified= lastModified ?? this.lastModified;
+  Metadata.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    statusLock = json['statusLock'];
+    title = json['title'];
+    titleLock = json['titleLock'];
+    titleSort = json['titleSort'];
+    titleSortLock = json['titleSortLock'];
+    summary = json['summary'];
+    summaryLock = json['summaryLock'];
+    readingDirection = json['readingDirection'];
+    readingDirectionLock = json['readingDirectionLock'];
+    publisher = json['publisher'];
+    publisherLock = json['publisherLock'];
+    ageRating = json['ageRating'];
+    ageRatingLock = json['ageRatingLock'];
+    language = json['language'];
+    languageLock = json['languageLock'];
+    genres = json['genres'].cast<String>();
+    genresLock = json['genresLock'];
+    tags = json['tags'].cast<String>();
+    tagsLock = json['tagsLock'];
+    totalBookCount = json['totalBookCount'];
+    totalBookCountLock = json['totalBookCountLock'];
+    sharingLabels = json['sharingLabels'].cast<String>();
+    sharingLabelsLock = json['sharingLabelsLock'];
+    links = json['links'].cast<String>();
+    linksLock = json['linksLock'];
+    alternateTitles = json['alternateTitles'].cast<String>();
+    alternateTitlesLock = json['alternateTitlesLock'];
+    created = json['created'];
+    lastModified = json['lastModified'];
   }
-    
-  @override
-  String toString() {
-    return jsonEncode(this);
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['statusLock'] = statusLock;
+    data['title'] = title;
+    data['titleLock'] = titleLock;
+    data['titleSort'] = titleSort;
+    data['titleSortLock'] = titleSortLock;
+    data['summary'] = summary;
+    data['summaryLock'] = summaryLock;
+    data['readingDirection'] = readingDirection;
+    data['readingDirectionLock'] = readingDirectionLock;
+    data['publisher'] = publisher;
+    data['publisherLock'] = publisherLock;
+    data['ageRating'] = ageRating;
+    data['ageRatingLock'] = ageRatingLock;
+    data['language'] = language;
+    data['languageLock'] = languageLock;
+    data['genres'] = genres;
+    data['genresLock'] = genresLock;
+    data['tags'] = tags;
+    data['tagsLock'] = tagsLock;
+    data['totalBookCount'] = totalBookCount;
+    data['totalBookCountLock'] = totalBookCountLock;
+    data['sharingLabels'] = sharingLabels;
+    data['sharingLabelsLock'] = sharingLabelsLock;
+    data['links'] = links;
+    data['linksLock'] = linksLock;
+    data['alternateTitles'] = alternateTitles;
+    data['alternateTitlesLock'] = alternateTitlesLock;
+    data['created'] = created;
+    data['lastModified'] = lastModified;
+    return data;
+  }
+}
+
+class BooksMetadata {
+  List<String>? authors;
+  List<String>? tags;
+  String? releaseDate;
+  String? summary;
+  String? summaryNumber;
+  String? created;
+  String? lastModified;
+
+  BooksMetadata(
+      {this.authors, this.tags, this.releaseDate, this.summary, this.summaryNumber, this.created, this.lastModified});
+
+  BooksMetadata.fromJson(Map<String, dynamic> json) {
+    authors = json['authors'].cast<String>();
+    tags = json['tags'].cast<String>();
+    releaseDate = json['releaseDate'];
+    summary = json['summary'];
+    summaryNumber = json['summaryNumber'];
+    created = json['created'];
+    lastModified = json['lastModified'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['authors'] = authors;
+    data['tags'] = tags;
+    data['releaseDate'] = releaseDate;
+    data['summary'] = summary;
+    data['summaryNumber'] = summaryNumber;
+    data['created'] = created;
+    data['lastModified'] = lastModified;
+    return data;
   }
 }

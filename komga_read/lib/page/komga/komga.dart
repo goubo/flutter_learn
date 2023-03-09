@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:komga_read/components/list_item.dart';
 import 'package:komga_read/entity/komga_library_entity.dart';
-import 'package:komga_read/page/setting/setting.dart';
+import 'package:komga_read/page/komga/components/library.dart';
 import 'package:komga_read/utils/komga_api.dart';
 import 'package:logger/logger.dart';
 
@@ -27,7 +27,7 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
-  List<KomgaLibraryEntity> itemList = [];
+  List<KomgaLibraryEntity> _itemList = [];
   final ScrollController _scrollController = ScrollController(); //listview的控制器
   var logger = Logger();
 
@@ -35,11 +35,8 @@ class _HomeBodyState extends State<HomeBody> {
   void initState() {
     super.initState();
     _scrollController.addListener(() {
-      logger.i(_scrollController.position.pixels);
-      logger.i(_scrollController.position.maxScrollExtent);
-      logger.i("划到最低端");
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-        logger.i("划到最低端");
+        logger.i("划到最低端加载下一页");
       }
     });
     loadData();
@@ -47,31 +44,30 @@ class _HomeBodyState extends State<HomeBody> {
 
   Future<void> _onRefresh() {
     return Future(() async {
-      logger.i('refresh');
-      itemList = [];
+      _itemList = [];
       loadData();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       // 下拉重新加载
       onRefresh: _onRefresh,
       child: ListView.builder(
-          itemCount: itemList.length,
+          itemCount: _itemList.length,
           controller: _scrollController,
           physics: const AlwaysScrollableScrollPhysics(), //不满一页滚动，能够上拉下拉刷新
           itemBuilder: (BuildContext context, int index) {
-            return ListItem(itemList[index].name, const Setting());
+            return ListItem(_itemList[index].name!, KomgaLibrary(_itemList[index]));
           }),
     );
   }
 
   Future<List<KomgaLibraryEntity>> loadData() async {
-    logger.i("加载书库数据");
     var library = await KomgaApi.instance.getLibrary();
     for (var lib in library) {
-      itemList.add(lib);
+      _itemList.add(lib);
     }
     setState(() {});
     return library;
